@@ -1,0 +1,37 @@
+# Local user data and credentials
+Names/
+settings.json
+proxies.txt
+crash.log
+.preferences-*.tmp
+.env
+.env.*
+*.pem
+*.key
+# Build products
+build/
+dist/
+release/
+*.exe
+*.zip
+# Python and local environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.test-data-*/
+.pytest_cache/
+# Editor / OS metadata
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+.test-user-data*/
+
+# Local advanced tools storage
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+*.corrupt-*
+
+.tooling/

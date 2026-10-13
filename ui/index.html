@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UIsername</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="themes.css">
+<link rel="stylesheet" href="features.css">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+</head>
+<body class="booting">
+<canvas id="sky-scene" aria-hidden="true" hidden></canvas>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-shield" viewBox="0 0 16 16"><path d="M8 1.5 13 3.5v4c0 3-2 5-5 7-3-2-5-4-5-7v-4Z"/><path d="m5.5 8 1.5 1.5 3.5-3.5"/></symbol>
+    <symbol id="i-generator" viewBox="0 0 16 16"><path d="m3 13 7-7 3 3-7 7M9 3V1m4 3 2-2M12 7h3M2 4h4M4 2v4"/></symbol>
+    <symbol id="i-identity" viewBox="0 0 16 16"><circle cx="8" cy="5" r="2.5"/><path d="M3 13c0-5 10-5 10 0M1 1h3M1 1v3m14-3h-3m3 0v3"/></symbol>
+    <symbol id="i-analytics" viewBox="0 0 16 16"><path d="M2 2v12h12M5 11V8m4 3V5m4 6V3"/></symbol>
+    <symbol id="i-sidebar" viewBox="0 0 20 20"><rect x="2.5" y="3" width="15" height="14" rx="2.5"/><path d="M10 3v14"/></symbol>
+    <symbol id="i-sidebar-closed" viewBox="0 0 20 20"><rect x="2.5" y="3" width="15" height="14" rx="2.5"/><path d="M6 3v14"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 16 16"><path d="m4 6 4 4 4-4"/></symbol>
+    <symbol id="i-monogram" viewBox="15 15 70 70"><text x="24.1775" y="65.5938" font-family="Segoe UI,Arial,sans-serif" font-weight="700" font-size="64" letter-spacing="-4.48" fill="currentColor">u.</text></symbol>
+    <symbol id="i-minimize" viewBox="0 0 16 16"><path d="M3 8h10"/></symbol>
+    <symbol id="i-maximize" viewBox="0 0 16 16"><rect x="3" y="3" width="10" height="10" rx=".6"/></symbol>
+    <symbol id="i-restore" viewBox="0 0 16 16"><path d="M5 5V2.5h8.5V11H11"/><rect x="2.5" y="5" width="8.5" height="8.5" rx=".6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 16 16"><path d="m3.5 3.5 9 9m0-9-9 9"/></symbol>
+    <symbol id="i-fullscreen" viewBox="0 0 16 16"><path d="M6 2.5H2.5V6M10 2.5h3.5V6M2.5 10v3.5H6m4 0h3.5V10"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 16 16"><path d="M2 4h12M2 8h12M2 12h12"/><circle cx="5" cy="4" r="1.5"/><circle cx="11" cy="8" r="1.5"/><circle cx="6" cy="12" r="1.5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 16 16"><path d="M4.5 3l8 5-8 5z"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 16 16"><rect x="4" y="4" width="8" height="8" rx="1"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 16 16"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 5.5V4A1.5 1.5 0 0 0 9 2.5H4A1.5 1.5 0 0 0 2.5 4v5A1.5 1.5 0 0 0 4 10.5h1.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 16 16"><path d="M2 4.5A1.5 1.5 0 0 1 3.5 3h2.8l1.4 1.5h4.8A1.5 1.5 0 0 1 14 6v5.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 11.5z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 16 16"><path d="M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.5 8h6l.5-8"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 16 16"><path d="M8 10.5V2.5M4.5 6L8 2.5 11.5 6M3 11v1.5a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V11"/></symbol>
+    <symbol id="i-home" viewBox="0 0 16 16"><path d="M2.5 7.5L8 3l5.5 4.5M4 6.5v6h8v-6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.5"/><path d="M8 1.5V3M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3 5.5 5.5 0 1 0 13 9.5z"/></symbol>
+  </defs>
+</svg>
+
+<header class="window-bar" id="window-bar"><button id="sidebar-toggle" class="sidebar-toggle" type="button" aria-label="Ocultar barra lateral" aria-controls="sidebar" aria-expanded="true"><svg class="ic sidebar-icon"><use id="sidebar-toggle-icon" href="#i-sidebar"/></svg></button><div class="window-drag pywebview-drag-region" id="window-drag"><span class="window-logo" aria-hidden="true"><svg class="app-monogram" aria-hidden="true"><use href="#i-monogram"/></svg></span><span data-no-translate>UIsername</span></div><div class="window-controls"><button id="window-fullscreen" aria-label="Tela cheia" title="F11"><svg class="ic"><use href="#i-fullscreen"/></svg></button><button id="window-minimize" class="native-control" hidden aria-label="Minimizar"><svg class="ic"><use href="#i-minimize"/></svg></button><button id="window-maximize" class="native-control" hidden aria-label="Maximizar"><svg class="ic"><use id="window-maximize-icon" href="#i-maximize"/></svg></button><button id="window-close" class="native-control close-window" hidden aria-label="Fechar"><svg class="ic"><use href="#i-close"/></svg></button></div></header>
+<div class="app">
+
+  <!-- Navegação -->
+  <aside class="side" id="sidebar">
+    <div class="brand"><span class="brand-icon" aria-hidden="true"><svg class="app-monogram" aria-hidden="true"><use href="#i-monogram"/></svg></span><span class="full" data-no-translate>UIsername</span><small id="version"></small></div>
+    <nav class="nav" id="nav" aria-label="Plataformas">
+      <button class="nav-item" id="nav-home" data-tip="Início">
+        <span class="mk"><svg class="ic"><use href="#i-home"/></svg></span><span class="nm">Início</span>
+      </button>
+      <button class="nav-item" id="nav-advanced" data-feature="advanced" aria-label="Advanced Generator"><span class="mk"><svg class="ic"><use href="#i-generator"/></svg></span><span class="nm">Advanced Generator</span></button>
+      <button class="nav-item" id="nav-identity" data-feature="identity" aria-label="Identity Checker"><span class="mk"><svg class="ic"><use href="#i-identity"/></svg></span><span class="nm">Identity Checker</span></button>
+      <button class="nav-item" id="nav-analytics" data-feature="analytics" aria-label="Analytics"><span class="mk"><svg class="ic"><use href="#i-analytics"/></svg></span><span class="nm">Analytics</span></button>
+      <div class="nav-label">Plataformas</div>
+    </nav>
+    <div class="side-foot"><div class="local-label"><i class="dot"></i> Workspace local</div>
+      <button class="nav-item" id="settings-open" aria-label="Configurações" data-tip="Configurações"><span class="mk"><svg class="ic"><use href="#i-settings"/></svg></span><span class="nm">Configurações</span></button>
+      <button class="nav-item" id="theme" data-tip="Alternar tema">
+        <span class="mk"><svg class="ic"><use id="theme-icon" href="#i-sun"/></svg></span>
+        <span class="nm" id="theme-name">Tema claro</span>
+      </button>
+    </div>
+  </aside>
+
+  <main>
+    <!-- Início -->
+    <section class="screen home" id="home">
+      <div class="home-in">
+        <div class="eyebrow">SEU PRÓXIMO USERNAME COMEÇA AQUI</div>
+        <h1>Um nome. Novas possibilidades.</h1>
+        <p class="lede">Explore ideias, verifique disponibilidade e encontre seu próximo username.</p>
+        <div class="home-toolbar"><span id="platform-count">Plataformas</span><label class="search-field"><span>Buscar</span><input class="input" id="platform-search" type="search" placeholder="Encontrar plataforma…" aria-label="Buscar plataforma"></label></div>
+        <div class="plist" id="plist"></div>
+        <p id="no-platforms" class="help" hidden>Nenhuma plataforma encontrada.</p>
+        <div class="home-note"><span class="note-icon">↗</span><div><strong>Da ideia à verificação</strong><p>Gere nomes aleatórios, combine verbos ou use seu nome como ponto de partida. Os disponíveis ficam salvos por plataforma.</p></div></div>
+      </div>
+    </section>
+
+    <!-- Plataforma -->
+    <section class="screen work" id="work" hidden>
+
+      <div class="config">
+        <header class="cfg-head"><div class="eyebrow">CONFIGURAÇÃO</div>
+          <div class="ph">
+            <span class="mk lg" id="p-mark"></span>
+            <div class="ph-text"><h2 id="p-name"></h2><p class="tags" id="p-tags"></p></div>
+          </div>
+          <p class="muted desc" id="p-desc"></p>
+        </header>
+
+        <div class="cfg-scroll">
+          <div class="sec">
+            <span class="label" id="lbl-mode">Tipo de geração</span>
+            <div class="modes" id="modes" role="radiogroup" aria-labelledby="lbl-mode"></div>
+          </div>
+
+          <div class="sec" id="sec-opts">
+            <span class="label">Opções</span>
+
+            <div id="opt-random" class="opt">
+              <label class="field"><span class="hint" id="lbl-length">Quantidade de letras</span>
+                <input class="input" id="f-length" data-lock type="number" min="1" step="1" inputmode="numeric" value="5" placeholder="ex: 5" autocomplete="off">
+              </label>
+            </div>
+
+            <div id="opt-words" class="opt" hidden>
+              <p class="help" id="verb-vocabulary-count" role="status"></p>
+              <label class="switch"><input type="checkbox" id="sw-two" data-lock><span class="track"></span><span>Combinar 2 verbos</span></label>
+              <label class="switch"><input type="checkbox" id="sw-digits" data-lock checked><span class="track"></span><span>Adicionar números no final</span></label>
+              <label class="switch"><input type="checkbox" id="sw-sep" data-lock><span class="track"></span><span id="lbl-sep">Separar com separador</span></label>
+            </div>
+
+            <div id="opt-name" class="opt" hidden>
+              <label class="field"><span class="hint">Idioma das sugestões</span><select class="input" id="f-name-language" data-lock><option value="en">Inglês</option><option value="pt">Português</option><option value="es">Espanhol</option></select></label>
+              <label class="field"><span class="hint">Seu nome (ex: João Silva)</span>
+                <input class="input" id="f-name" data-lock placeholder="Digite seu nome" autocomplete="off">
+              </label>
+              <label class="switch"><input type="checkbox" id="sw-suffix" data-lock checked><span class="track"></span><span>Sufixos profissionais (dev, code...)</span></label>
+              <label class="switch"><input type="checkbox" id="sw-namedigits" data-lock checked><span class="track"></span><span>Adicionar números</span></label>
+            </div>
+
+            <div id="opt-check" class="opt" hidden>
+              <label class="field"><span class="hint">Usernames (separe por vírgula ou espaço)</span>
+                <textarea class="input area" id="f-list" data-lock rows="3" placeholder="ex: nome1, nome2, nome3" spellcheck="false"></textarea>
+              </label>
+            </div>
+          </div>
+
+          <div class="sec" id="sec-amount">
+            <label class="field"><span class="label">Quantidade de usernames</span>
+              <input class="input" id="f-amount" data-lock type="number" min="1" step="1" inputmode="numeric" value="100" placeholder="ex: 100" autocomplete="off">
+            </label>
+          </div>
+
+          <div class="sec" id="sec-token" hidden>
+            <label class="field"><span class="label" id="lbl-token">Token</span>
+              <input class="input mono" id="f-token" data-lock type="password" autocomplete="off" spellcheck="false">
+            </label>
+            <p class="help" id="token-help"></p>
+          </div>
+
+          <div class="sec" id="sec-proxy" hidden>
+            <label class="field"><span class="label" id="lbl-proxy">Proxies</span>
+              <span class="hint">Um por linha: ip:porta ou usuario:senha@ip:porta</span>
+              <textarea class="input area mono" id="f-proxies" maxlength="400000" data-lock rows="5" wrap="off" spellcheck="false"></textarea>
+            </label>
+            <div class="row-actions">
+              <button class="btn sm" id="proxy-import" data-lock><svg class="ic"><use href="#i-upload"/></svg>Importar .txt</button>
+              <button class="btn sm" id="proxy-clear" data-lock><svg class="ic"><use href="#i-trash"/></svg>Limpar</button>
+              <input type="file" id="proxy-file" accept=".txt,text/plain" hidden>
+            </div>
+            <p class="proxy-count" id="proxy-count">0 proxies válidos</p>
+          </div>
+        </div>
+
+        <div id="form-error" class="form-error" role="alert" hidden></div>
+        <div class="proxy-run-choice" id="proxy-run-choice" hidden>
+          <button class="btn proxy-run-button" id="use-saved-proxies" type="button" aria-pressed="false" aria-describedby="proxy-run-description">
+            <svg class="ic"><use href="#i-shield"/></svg><span id="proxy-run-label">Usar os proxies das configurações?</span><span class="proxy-run-indicator" aria-hidden="true"></span>
+          </button>
+          <p class="help" id="proxy-run-description"></p>
+        </div>
+        <footer class="cfg-foot">
+          <button class="btn primary grow" id="btn-start"></button>
+          <button class="btn danger" id="btn-stop" disabled><svg class="ic"><use href="#i-stop"/></svg>Parar</button>
+        </footer>
+      </div>
+
+      <div class="output">
+        <header class="out-head">
+          <span class="status" role="status" id="status" data-state="idle"><i class="dot"></i><b id="status-text">Parado</b></span>
+          <span class="muted trunc" id="subtitle"></span>
+          <span class="muted mono xs right" id="quota"></span>
+        </header>
+
+        <div class="stats">
+          <div class="stat"><b id="st-done">0</b><span><i class="key"></i>Processados</span></div>
+          <div class="stat"><b id="st-valid">0</b><span><i class="key ok"></i><span id="valid-label">Disponíveis</span></span></div>
+          <div class="stat"><b id="st-invalid">0</b><span><i class="key bad"></i>Indisponíveis</span></div>
+          <div class="stat"><b id="st-error">0</b><span><i class="key warn"></i>Erros</span></div>
+        </div>
+
+        <div class="progress" role="progressbar" aria-label="Progresso da verificação" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress">
+          <div class="bar"><i id="bar"></i></div><span class="mono xs" id="pct">0%</span>
+        </div>
+
+        <div class="log-wrap">
+          <div class="log-head">
+            <span class="log-title">Atividade</span>
+            <span class="log-actions">
+              <button class="btn ghost" id="btn-copy"><svg class="ic"><use href="#i-copy"/></svg><span>Copiar disponíveis</span></button>
+              <button class="btn ghost" id="btn-folder"><svg class="ic"><use href="#i-folder"/></svg><span>Abrir pasta</span></button>
+              <button class="btn ghost" id="btn-clear"><svg class="ic"><use href="#i-trash"/></svg><span>Limpar</span></button>
+            </span>
+          </div>
+          <div class="log-tools"><div class="log-filters" role="group" aria-label="Filtrar atividade"><button class="filter active" data-filter="all" aria-pressed="true">Tudo</button><button class="filter" data-filter="valid" aria-pressed="false">Disponíveis</button><button class="filter" data-filter="invalid" aria-pressed="false">Indisponíveis</button><button class="filter" data-filter="warn" aria-pressed="false">Avisos</button></div><label class="log-search"><input class="input" id="log-search" type="search" placeholder="Buscar na atividade…" aria-label="Buscar na atividade"></label></div>
+          <div class="log" id="log" role="log" aria-live="off"></div>
+        </div>
+
+        <footer class="path"><span>Salvando em</span> <span class="mono" id="path"></span></footer>
+      </div>
+    </section>
+<section class="screen feature-page" id="advanced" hidden aria-labelledby="advanced-title">
+  <header class="feature-head"><div><p class="eyebrow">GERAÇÃO LOCAL</p><h1 id="advanced-title">Advanced Generator</h1><p class="muted">Crie padrões, refine as regras e verifique somente os nomes escolhidos.</p></div><span class="feature-tag">Sem consultas à rede</span></header>
+  <div class="tool-layout">
+    <form id="advanced-form" class="tool-panel">
+      <div class="tool-panel-head"><h2>Editor de padrões</h2><button type="button" class="btn ghost sm" id="generator-reset">Restaurar preset</button></div>
+      <label class="field"><span class="hint">Preset</span><select class="input" id="generator-preset"></select></label>
+      <label class="field"><span class="hint">Padrão</span><input class="input mono" id="rule-pattern" value="LLLL" maxlength="128" spellcheck="false" data-no-translate></label>
+      <p class="help">L: minúscula · U: maiúscula · ?: letra · #: número · C: consoante · V: vogal</p>
+      <p class="help">word, prefix, suffix ou {word}. + concatena; use barra invertida para caracteres literais.</p>
+      <div class="rule-grid"><label class="field"><span class="hint">Comprimento mínimo</span><input class="input" type="number" id="rule-min_length" min="1" max="255" value="1"></label><label class="field"><span class="hint">Comprimento máximo</span><input class="input" type="number" id="rule-max_length" min="1" max="255" value="20"></label></div>
+      <div class="rule-grid"><label class="field"><span class="hint">Idioma das palavras</span><select class="input" id="rule-language"><option value="en">Inglês</option><option value="pt">Português</option><option value="es">Espanhol</option></select></label><label class="field"><span class="hint">Quantidade</span><input class="input" type="number" id="rule-amount" min="1" max="10000" value="100"></label></div>
+      <details class="rule-details" open><summary>Caracteres e afixos</summary><div class="rule-checks">
+        <label><input type="checkbox" id="rule-lowercase" checked>Minúsculas</label><label><input type="checkbox" id="rule-uppercase" checked>Maiúsculas</label><label><input type="checkbox" id="rule-numbers" checked>Números</label><label><input type="checkbox" id="rule-underscores" checked>Underscores</label>
+      </div><label class="field"><span class="hint">Caracteres permitidos (vazio: padrão)</span><input class="input mono" id="rule-allowed" data-no-translate></label><label class="field"><span class="hint">Caracteres proibidos</span><input class="input mono" id="rule-forbidden" data-no-translate></label><div class="rule-grid"><label class="field"><span class="hint">Prefixos (separados por vírgula)</span><input class="input" id="rule-prefixes" data-no-translate></label><label class="field"><span class="hint">Sufixos (separados por vírgula)</span><input class="input" id="rule-suffixes" data-no-translate></label></div></details>
+      <details class="rule-details"><summary>Filtros avançados</summary><div class="rule-checks vertical">
+        <label><input type="checkbox" id="rule-require_vowel">Exigir vogal</label><label><input type="checkbox" id="rule-require_consonant">Exigir consoante</label><label><input type="checkbox" id="rule-no_adjacent_repeat">Evitar caracteres consecutivos repetidos</label><label><input type="checkbox" id="rule-no_repeated_sequences">Evitar sequências repetidas</label><label><input type="checkbox" id="rule-no_numeric_sequences">Evitar sequências numéricas simples</label><label><input type="checkbox" id="rule-pronounceable">Alternar vogais e consoantes</label>
+      </div><label class="field"><span class="hint">Palavras proibidas (separadas por vírgula)</span><input class="input" id="rule-banned_words" data-no-translate></label><div class="rule-grid"><label class="field"><span class="hint">Máximo de números consecutivos</span><input class="input" id="rule-max_consecutive_digits" type="number" min="0" max="255" value="4"></label><label class="field"><span class="hint">Limite de tentativas</span><input class="input" id="rule-max_attempts" type="number" min="1" max="1000000" value="100000"></label></div></details>
+      <div class="preset-editor"><label class="field"><span class="hint">Nome do preset</span><input class="input" id="generator-preset-name" maxlength="60" data-no-translate></label><div class="feature-actions"><button class="btn sm" type="button" id="preset-save">Salvar preset</button><button class="btn sm" type="button" id="preset-copy">Salvar como novo</button><button class="btn ghost sm" type="button" id="preset-delete">Excluir preset</button></div></div>
+      <p class="feature-error" id="generator-error" role="alert" hidden></p><div class="feature-actions"><button class="btn primary" type="submit" id="generator-start">Gerar prévia</button><button class="btn" type="button" id="generator-estimate">Estimar combinações</button><button class="btn danger" type="button" id="generator-cancel" disabled>Cancelar</button></div>
+    </form>
+    <div class="tool-panel preview-panel"><div class="tool-panel-head"><div><h2>Prévia</h2><p class="help" id="generator-summary" role="status">Os nomes gerados ainda não foram verificados.</p></div><button class="btn ghost sm" id="generator-favorites">Favoritos</button></div><p class="estimate-label" id="generator-space" role="status"></p>
+      <div class="feature-actions"><label class="inline-check"><input type="checkbox" id="generator-select-all">Selecionar todos</label><button class="btn sm" id="generator-copy">Copiar</button><button class="btn sm" id="generator-export">Exportar lista</button></div>
+      <div id="generator-names" class="name-grid"><p class="feature-empty">Gere uma prévia para explorar os resultados.</p></div><div class="list-pagination"><button class="btn ghost sm" id="generator-prev">Anterior</button><span id="generator-page"></span><button class="btn ghost sm" id="generator-next">Próximo</button></div>
+      <footer class="preview-footer"><span id="generator-selection" class="muted">0 selecionados</span><button class="btn primary" id="generator-to-identity">Enviar para verificação</button></footer>
+    </div>
+  </div>
+</section>
+<section class="screen feature-page" id="identity" hidden aria-labelledby="identity-title">
+  <header class="feature-head"><div><p class="eyebrow">IDENTIDADE DIGITAL</p><h1 id="identity-title">Identity Checker</h1><p class="muted">Um username, várias plataformas. Cada resposta mantém seu grau de confirmação.</p></div></header>
+  <form id="identity-form" class="tool-panel identity-config"><div class="identity-top"><label class="field"><span class="hint">Usernames (um por linha, até 100)</span><textarea class="input area mono" rows="2" id="identity-names" placeholder="Digite um username"></textarea></label><div class="identity-limits"><label class="field"><span class="hint">Timeout (segundos)</span><input class="input" id="identity-timeout" type="number" min="2" max="30" value="10"></label><label class="field"><span class="hint">Concorrência</span><input class="input" id="identity-concurrency" type="number" min="1" max="8" value="4"></label><label class="field"><span class="hint">Novas tentativas</span><input class="input" id="identity-retries" type="number" min="0" max="2" value="1"></label></div></div>
+    <div class="feature-actions"><label class="inline-check"><input type="checkbox" id="identity-all" checked>Todas as plataformas</label><label class="feature-search"><input class="input" id="identity-platform-search" type="search" placeholder="Buscar plataforma" aria-label="Buscar plataforma"></label></div><div id="identity-platforms" class="platform-chips"></div>
+    <details class="rule-details"><summary>Credenciais opcionais e obrigatórias</summary><p class="help">Credenciais ficam somente na memória desta sessão.</p><div id="identity-credentials" class="credential-grid"></div></details>
+    <div class="feature-actions"><label class="inline-check"><input type="checkbox" id="identity-auto">Verificar sugestões automaticamente</label><span class="help">Sugestões seguem as mesmas pausas e limites.</span></div><p class="feature-error" id="identity-error" role="alert" hidden></p>
+    <div class="feature-actions"><button class="btn primary" id="identity-start" type="submit">Verificar identidade</button><button class="btn danger" id="identity-cancel" type="button" disabled>Cancelar</button><button class="btn" id="identity-repeat" type="button">Repetir verificação</button><span id="identity-progress" role="status" class="muted"></span></div><progress id="identity-bar" max="1" value="0" aria-label="Progresso da verificação"></progress>
+  </form>
+  <div class="tool-panel"><div class="tool-panel-head"><div><h2>Matriz de disponibilidade</h2><p class="help" id="identity-consistency" role="status">Ainda não há resultados confirmados.</p><p class="help" id="identity-breakdown"></p></div><label class="field"><span class="hint">Histórico de consultas</span><select class="input" id="identity-history"><option value="">Consulta atual</option></select></label></div><div class="feature-actions"><input class="input feature-search" id="identity-result-search" type="search" placeholder="Buscar nos resultados" aria-label="Buscar nos resultados"><select class="input feature-select" id="identity-status" aria-label="Filtrar por status"><option value="">Todos os resultados</option></select><select class="input feature-select" id="identity-format" aria-label="Formato de exportação"><option value="csv">CSV</option><option value="json">JSON</option></select><label class="inline-check"><input type="checkbox" id="identity-export-available">Somente disponíveis confirmados</label><button class="btn sm" id="identity-export">Exportar resultados</button></div>
+    <div class="feature-table-wrap"><table class="feature-table"><thead><tr><th>Plataforma</th><th>Username</th><th>Resultado</th><th>Ação</th></tr></thead><tbody id="identity-results"></tbody></table></div><p class="feature-empty" id="identity-empty">Inicie uma consulta para comparar as plataformas.</p><div class="list-pagination"><button class="btn ghost sm" id="identity-prev">Anterior</button><span id="identity-page"></span><button class="btn ghost sm" id="identity-next">Próximo</button></div>
+  </div>
+</section>
+<section class="screen feature-page" id="analytics" hidden aria-labelledby="analytics-title">
+  <header class="feature-head"><div><p class="eyebrow">ESTATÍSTICAS LOCAIS</p><h1 id="analytics-title">Analytics</h1><p class="muted">Geração e verificação medidas separadamente, com histórico preservado neste computador.</p></div><button class="btn" id="analytics-refresh">Atualizar</button></header>
+  <div class="analytics-toolbar"><label class="field"><span class="hint">Plataforma</span><select class="input" id="analytics-platform"><option value="">Todas as plataformas</option><option value="local">Geração local</option></select></label><label class="field"><span class="hint">Período</span><select class="input" id="analytics-period"><option value="all">Todo o período</option><option value="hour">Última hora</option><option value="day">Últimas 24 horas</option><option value="week">Últimos 7 dias</option><option value="month">Últimos 30 dias</option></select></label><button class="btn" id="analytics-csv">Exportar CSV</button><button class="btn" id="analytics-json">Exportar JSON</button></div>
+  <p class="feature-error" id="analytics-error" role="alert" hidden></p><div class="analytics-stats" id="analytics-stats"></div>
+  <div class="analytics-charts"><div class="tool-panel"><h2>Verificações ao longo do tempo</h2><div id="analytics-timeline" class="chart"></div><p class="help chart-detail" id="timeline-detail">Selecione um ponto para ver os detalhes.</p></div><div class="tool-panel"><h2>Distribuição dos resultados</h2><div id="analytics-distribution" class="chart"></div><p class="help chart-detail" id="distribution-detail">Erros e inconclusivos ficam fora da taxa de disponibilidade.</p></div></div>
+  <div class="tool-panel"><div class="tool-panel-head"><h2>Desempenho por plataforma</h2><select class="input feature-select" id="analytics-metric" aria-label="Métrica do gráfico"><option value="verified">Verificações</option><option value="available">Disponíveis confirmados</option><option value="speed">Verificações por segundo</option><option value="conclusive_rate">Taxa de respostas conclusivas</option></select></div><div id="analytics-platform-chart" class="platform-chart"></div><div class="feature-table-wrap"><table class="feature-table"><thead><tr><th>Plataforma</th><th>Verificações</th><th>Velocidade média</th><th>Respostas conclusivas</th><th>Disponíveis confirmados</th></tr></thead><tbody id="analytics-platform-rows"></tbody></table></div><p class="help">Velocidade por plataforma considera o tempo de cada consulta, incluindo espera. A média geral considera a duração das sessões de verificação.</p></div>
+  <div class="tool-panel"><div class="tool-panel-head"><h2>Histórico de sessões</h2><input class="input feature-search" id="analytics-search" type="search" placeholder="Buscar no histórico" aria-label="Buscar no histórico"></div><div class="feature-table-wrap"><table class="feature-table"><thead><tr><th>Sessão / data</th><th>Plataforma</th><th>Método</th><th>Verificados</th><th>Disponíveis</th><th>Duração</th><th>Status</th><th>Ações</th></tr></thead><tbody id="analytics-sessions"></tbody></table></div><p class="feature-empty" id="analytics-empty">Suas estatísticas aparecerão após a primeira geração ou consulta.</p><p class="help">Arquivar mantém os resultados e as estatísticas. Excluir remove a sessão e seus resultados do histórico, sem apagar os arquivos de usernames.</p></div>
+  <div class="tool-panel"><div class="tool-panel-head"><h2>Sessões arquivadas</h2><span class="hint" id="analytics-archived-count"></span></div><div class="feature-table-wrap"><table class="feature-table"><thead><tr><th>Sessão / data</th><th>Plataforma</th><th>Método</th><th>Verificados</th><th>Disponíveis</th><th>Duração</th><th>Status</th><th>Ações</th></tr></thead><tbody id="analytics-archived-sessions"></tbody></table></div><p class="feature-empty" id="analytics-archived-empty">Nenhuma sessão arquivada.</p><p class="help">Até 200 sessões por seção, com os filtros selecionados. Restaure uma sessão para voltar ao histórico principal.</p></div>
+</section>
+
+  </main>
+</div>
+
+<div class="offline" id="offline" role="alert" hidden>Conexão interrompida. Tentando reconectar…</div>
+<div class="toast" id="toast" role="status" hidden></div>
+<button class="resize-grip native-control" id="window-resize" hidden aria-label="Redimensionar janela" title="Redimensionar janela">⋰</button>
+
+<dialog id="welcome-dialog" class="preferences-dialog welcome-dialog" aria-labelledby="welcome-title" aria-describedby="welcome-desc">
+  <form id="welcome-form">
+    <span class="welcome-logo" aria-hidden="true"><svg class="app-monogram" aria-hidden="true"><use href="#i-monogram"/></svg></span>
+    <p class="eyebrow">Bem-vindo ao UIsername</p>
+    <h2 id="welcome-title">Escolha seu idioma</h2>
+    <p class="dialog-lede" id="welcome-desc">Você pode mudar o idioma depois, nas configurações.</p>
+    <label class="field"><span class="hint">Idioma do aplicativo</span><select class="input language-select" id="welcome-language" data-no-translate autofocus></select></label>
+    <p class="dialog-error" id="welcome-error" role="alert" hidden></p>
+    <button class="btn primary welcome-submit" type="submit">Começar</button>
+  </form>
+</dialog>
+<dialog id="settings-dialog" class="preferences-dialog" aria-labelledby="settings-title">
+  <form id="settings-form" novalidate>
+    <header class="dialog-head"><div><p class="eyebrow">Personalize seu workspace</p><h2 id="settings-title">Configurações</h2></div><button type="button" class="btn ghost" id="settings-close" aria-label="Fechar configurações">×</button></header>
+    <div class="dialog-body">
+      <section class="settings-section"><h3>Idioma e aparência</h3><div class="settings-grid">
+        <label class="field"><span class="hint">Idioma do aplicativo</span><select class="input language-select" id="setting-language" data-no-translate></select></label>
+        <label class="field"><span class="hint">Aparência</span><select class="input" id="setting-theme"><option value="dark">Escuro</option><option value="light">Claro</option><option value="system">Seguir o sistema</option></select></label>
+      </div>
+        <label class="setting-toggle" id="theme-motion-row" hidden><span><strong>Animações do céu</strong><small>Desative para manter um céu estático. O modo de movimento reduzido do sistema também é respeitado.</small></span><span class="switch"><input type="checkbox" id="setting-theme_animation"><span class="track"></span></span></label>
+      </section>
+      <section class="settings-section"><h3>Janela do aplicativo</h3>
+        <label class="field"><span class="hint">Modo de abertura</span><select class="input" id="setting-startup_mode" aria-describedby="startup-mode-help"><option value="window">Modo janela</option><option value="fullscreen">Tela cheia</option></select><span class="help" id="startup-mode-help">Aplicado na próxima abertura do aplicativo. No navegador, use F11.</span></label>
+      </section>
+      <section class="settings-section"><h3>Proxies</h3>
+        <label class="setting-toggle"><span><strong>Usar proxies opcionais</strong><small>Define a opção inicial. Você também pode escolher acima do botão de iniciar.</small></span><span class="switch"><input type="checkbox" id="setting-use_proxies"><span class="track"></span></span></label>
+        <div data-proxy-control class="settings-proxy-editor">
+          <label class="field" for="setting-proxies"><span>Lista de proxies</span><textarea class="input mono" id="setting-proxies" rows="6" wrap="off" spellcheck="false" placeholder="127.0.0.1:8080&#10;http://usuario:senha@host:porta" maxlength="400000"></textarea></label>
+          <p class="help">Um proxy por linha: host:porta ou protocolo://usuario:senha@host:porta. A lista é usada pelas plataformas compatíveis e salva neste computador.</p>
+          <div class="feature-actions"><button class="btn sm" type="button" id="settings-proxy-import">Importar .txt</button><button class="btn sm" type="button" id="settings-proxy-clear">Limpar lista</button><input type="file" id="settings-proxy-file" accept=".txt,text/plain" hidden></div>
+          <p class="help" id="settings-proxy-count" aria-live="polite"></p><p class="help" id="settings-proxy-status" role="status"></p><p class="form-error" id="settings-proxy-error" role="alert" hidden></p>
+        </div>
+      </section>
+      <section class="settings-section"><h3>Preferências de uso</h3>
+        <div class="speed-setting"><label class="field"><span class="hint">Intervalo entre usernames (ms)</span><div class="speed-input"><input class="input" id="setting-interval" type="number" min="0" max="600000" step="1" inputmode="numeric" aria-describedby="interval-help"><span class="speed-unit" data-no-translate>ms</span></div><span class="help" id="interval-help">1000 ms = 1 segundo. Quanto maior o intervalo, mais lenta a geração. 0 usa o padrão; os limites mínimos das plataformas são respeitados.</span></label><div class="speed-presets" role="group" aria-label="Velocidade da geração"><button class="btn sm" type="button" data-speed-ms="0" aria-pressed="false">Padrão</button><button class="btn sm" type="button" data-speed-ms="100" aria-pressed="false" data-no-translate>100 ms</button><button class="btn sm" type="button" data-speed-ms="250" aria-pressed="false" data-no-translate>250 ms</button><button class="btn sm" type="button" data-speed-ms="500" aria-pressed="false" data-no-translate>500 ms</button><button class="btn sm" type="button" data-speed-ms="1000" aria-pressed="false" data-no-translate>1000 ms</button><button class="btn sm" type="button" data-speed-ms="2000" aria-pressed="false" data-no-translate>2000 ms</button></div><p class="help">Salvo automaticamente. Aplicado na próxima execução; em lotes, a pausa é proporcional à quantidade.</p></div>
+        <label class="setting-toggle"><span><strong>Consultas em lote (batch)</strong><small>Agrupa usernames nas plataformas compatíveis. Aplicado na próxima execução.</small></span><span class="switch"><input type="checkbox" id="setting-batch_enabled"><span class="track"></span></span></label>
+        <label class="field"><span class="hint">Quantidade padrão</span><input class="input" id="setting-amount" type="number" min="1" max="100000" step="1" inputmode="numeric" aria-describedby="amount-help"><span class="help" id="amount-help">Aplicada na próxima abertura do aplicativo.</span></label>
+        <label class="setting-toggle"><span><strong>Interface compacta</strong><small>Reduz o espaçamento da navegação e da atividade.</small></span><span class="switch"><input type="checkbox" id="setting-compact"><span class="track"></span></span></label>
+        <label class="setting-toggle"><span><strong>Acompanhar novas atividades</strong><small>Rola o log quando você já está no final.</small></span><span class="switch"><input type="checkbox" id="setting-auto_scroll"><span class="track"></span></span></label>
+        <label class="setting-toggle"><span><strong>Confirmar antes de parar</strong><small>Evita interromper uma execução por engano.</small></span><span class="switch"><input type="checkbox" id="setting-confirm_stop"><span class="track"></span></span></label>
+      </section>
+      <section class="settings-about about-us" aria-labelledby="about-us-title">
+        <h3 id="about-us-title">Sobre nós <span id="settings-version" data-no-translate></span></h3>
+        <div class="about-project">
+          <div class="about-project-head"><span class="about-project-logo" aria-hidden="true"><svg class="app-monogram"><use href="#i-monogram"/></svg></span><div><strong data-no-translate>UIsername</strong><span class="about-project-tagline">Um projeto solo com acesso para todos.</span></div></div>
+          <p>O UIsername é um projeto solo, criado e desenvolvido por uma única pessoa.</p>
+          <p>Ele nasceu ao perceber que muitas ferramentas simples, mas importantes, são oferecidas apenas mediante pagamento.</p>
+          <p>A missão é acabar com a necessidade de pagar por esses serviços, oferecendo uma alternativa gratuita e acessível para gerar e verificar usernames.</p>
+        </div>
+        <p class="about-data">Preferências salvas neste computador. Tokens não são gravados nas configurações.</p>
+      </section>
+      <p class="dialog-error" id="settings-error" role="alert" hidden></p>
+    </div>
+    <footer class="dialog-foot"><button type="button" class="btn ghost" id="settings-reset">Restaurar padrões</button><span id="settings-save-status" role="status">Alterações salvas automaticamente</span></footer>
+  </form>
+</dialog>
+<dialog class="preferences-dialog cancel-confirm-dialog" id="cancel-confirm-dialog" aria-labelledby="cancel-confirm-title" aria-describedby="cancel-confirm-description">
+  <div class="dialog-head"><div><p class="eyebrow">Confirmar ação</p><h2 id="cancel-confirm-title">Cancelar execução?</h2></div></div>
+  <div class="dialog-body"><p class="dialog-lede" id="cancel-confirm-description">Deseja interromper a execução? Os resultados já gerados serão mantidos.</p></div>
+  <div class="dialog-foot"><button type="button" class="btn" data-keep-running autofocus>Continuar</button><button type="button" class="btn danger" data-confirm-cancel>Confirmar cancelamento</button></div>
+</dialog>
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
+<script src="language-picker.js"></script>
+<script src="sky-scene.js"></script>
+<script src="theme-picker.js"></script>
+<script src="proxy-manager.js"></script>
+<script src="confirm-action.js"></script>
+<script src="preferences.js"></script>
+<script src="search.js"></script>
+<script src="window.js"></script>
+<script src="features-model.js"></script>
+<script src="features.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
