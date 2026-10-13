@@ -24,6 +24,8 @@
     <a href="https://github.com/stagedivepov/UIsername/issues">Report a bug</a>
     &nbsp;·&nbsp;
     <a href="#contributing">Contribute</a>
+    &nbsp;·&nbsp;
+    <a href="#support">Buy me a coffee</a>
   </p>
 </div>
 
@@ -186,6 +188,38 @@ Suggestions, translations, fixes, and new integrations are welcome.
 4. Open a [Pull Request](https://github.com/stagedivepov/UIsername/pulls) explaining what changed and how it was verified.
 
 When reporting a bug, include the app version, Windows version, affected platform, and steps to reproduce. Remove tokens, passwords, and private proxies from screenshots and logs.
+
+## Support
+
+<div align="center">
+  <a href="#crypto-donations">
+    <img src="docs/coffee-banner.svg" width="460" alt="Buy me a coffee — support UIsername">
+  </a>
+</div>
+
+UIsername is a free solo project. If it helped you, you can support its development with a coffee-sized crypto donation. Contributions are entirely optional and do not unlock paid features.
+
+### Crypto donations
+
+**Solana (SOL) · Solana network**
+
+```text
+URVKya26gd2wJyftN24U5ZZ8y9uefku7BJSyxHG95Si
+```
+
+**Ethereum (ETH) · Ethereum network**
+
+```text
+0xDEBD7e26ae1Fe1305D316e58752dd2594AC6a06B
+```
+
+**Bitcoin (BTC) · Bitcoin network**
+
+```text
+bc1q6ph3f35538dguuylk0fst28pryf25dwgryhst9
+```
+
+You can also support the project by starring the repository, sharing it, reporting bugs, or contributing improvements. Thank you for helping keep these tools accessible.
 
 ## Third-party credits and licenses
 
